@@ -33,6 +33,7 @@ db.connect((err) => {
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
+
 // Retrieve all patients
 app.get('/patients', (req, res) => {
     const query = 'SELECT patient_id, first_name, last_name, date_of_birth FROM patients';
@@ -54,10 +55,12 @@ app.get('/providers', (req, res) => {
             console.error('Error retrieving providers:', err);
             res.status(500).send('Internal Server Error');
         } else {
+            console.log(results); // Add this to see the data
             res.render('providers', { results });
         }
     });
 });
+
 
 // Filter patients by First Name
 app.get('/patients/search/:firstName', (req, res) => {
